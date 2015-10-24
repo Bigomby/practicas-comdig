@@ -1,3 +1,4 @@
+
 # Práctica 2
 
 ## Funciones y scripts
@@ -5,6 +6,7 @@
 Ambos son ficheros con extensión `.m`. Sin embargo:
 
 - **Funciones:** La primera línea debe contener la sentencia:
+  
   ```matlab
   function salida = mifuncion(entrada)
   ```
@@ -59,10 +61,7 @@ function [fxi,ci] = LCDfdp(x)
 
 ## Apartado 1
 
-> Generar Np = 10 6 muestras de dos variables aleatorias gaussianas N 1
-> y N 2 , conjunta-mente gaussianas, con medias respectivamente +1 y −1
-> y varianza σ 2 = 4. Obtener yrepresentar en una misma figura sus
-> funciones densidad de probabilidad.
+> Generar $Np = 10^6$ muestras de dos variables aleatorias gaussianas $N_1$ y $N_2$ , conjunta-mente gaussianas, con medias respectivamente $+1$ y $−1$ y varianza $\sigma^2 = 4$. Obtener yrepresentar en una misma figura sus funciones densidad de probabilidad.
 
 ### Solución
 
@@ -113,6 +112,7 @@ siendo $A$ una variable aleatoria discreta que toma con probabilidades $\{1/4, 3
 - $X$.
 
 > **Nota**: para generar la función $A$, que es una variable aleatoria discreta, usamos:
+>
 >```matlab
 >A = sign(rand(1,Np) - 0.75)
 >```
@@ -127,4 +127,4 @@ siendo $A$ una variable aleatoria discreta que toma con probabilidades $\{1/4, 3
 |------------|-----------------------|--------------------|
 | $X_1$      | Rango, evaluar, plot  | `LCDfdp(); plot()` |
 | $X_2$      | Rango, evaluar, plot  | `LCDfdp(); plot()` |
-| $X$        | Rango, evaluar, plot  | $ve = var(x) $     |
+| $X$        | Rango, evaluar, plot  | $ve = var(x)$     |
