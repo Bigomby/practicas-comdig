@@ -1,12 +1,20 @@
 %% LCDfdp: Calcula la fdp de una Waa de forma empírica
-function [fxi,ci] = LCDfdp(x)
+function [fxi,ci] = LCDfdp(X, Npuntos)
+  % Número de muestras
+  Np = length(X);
 
-  % Calculamos el histograma con 100 muestras
-  [hi, ci]=hist(x, 100);
+  % Número de puntos por defecto
+  Npuntos=128;
 
-  % Longitud de x
-  Np = length(x);
+  % Si se proporciona un segundo parámetro se usará en lugar de valor por
+  % defecto
+  if nargin > 1
+    Npuntos = xpuntos;
+  end
 
-  % Calculamos la función densidad de probabilidad
-  fxi = hi/Np/(ci(2) - ci(1));
+  % Se genera un histograma
+  [fxi, ci] = hist(X, Npuntos);
+
+  % Se calcula la función aproximada
+  fxi = fxi/Np/(ci(2) - ci(1));
 end
