@@ -9,3 +9,4 @@ function [fxi,ci] = LCDfdp(x)
 
   % Calculamos la función densidad de probabilidad
   fxi = hi/Np/(ci(2) - ci(1));
+end
