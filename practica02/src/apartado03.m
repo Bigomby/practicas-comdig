@@ -2,10 +2,10 @@ clear all
 close all
 
 % Definimos el número de muestras
-Np = 1e3;
+Np = 1e6;
 
 % Definimos la variable aleatoria del enunciado
-N = sqrt(0.1) * randn(1,Np);
+N = sqrt(0.1) * randn(1, Np);
 
 % Generamos una señal discreta usando randi() y sign()
 A = sign(rand(1,Np) - 0.75);
@@ -19,6 +19,13 @@ X2 = N - 1;
 % Apartado (c)
 X = N + A;
 
-subplot(1,3,1); hist(X1, 100);
-subplot(1,3,2); hist(X2, 100);
-subplot(1,3,3); hist(X, 100);
+[fYi1, yi1] = LCDfdp(X1);
+[fYi2, yi2] = LCDfdp(X2);
+[fYi, yi] = LCDfdp(X);
+
+
+subplot(3,1,1); plot (yi1, fYi1, 'b'); axis([-2 2]);
+subplot(3,1,2); plot (yi2, fYi2, 'b'); axis([-2 2]);
+subplot(3,1,3); plot (yi, fYi, 'b'); axis([-2 2]);
+
+
