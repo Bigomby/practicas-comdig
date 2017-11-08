@@ -1,3 +1,6 @@
+clear all;
+close all;
+
 % Definimos el número de muestras
 Np = 1e6;
 
@@ -13,4 +16,13 @@ N2 = sqrt(4) * randn(1,Np) - 1;
 hold on
 plot(c1,f1);
 plot(c2,f2);
+hold off
+
+% Se calcula de forma teórica
+ftN1 = LCDNormal(c1, 1, 4);
+ftN2 = LCDNormal(c2, -1, 4);
+
+hold on
+plot(c1, ftN1, 'o');
+plot(c2, ftN2, 'o');
 hold off

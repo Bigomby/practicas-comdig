@@ -1,4 +1,5 @@
-function [fXi, xi] = LCDfdp(X, xpuntos)
+%% LCDfdp: Calcula la fdp de una Waa de forma empírica
+function [fxi,ci] = LCDfdp(X, xpuntos)
   % Número de muestras
   Np = length(X);
 
@@ -12,8 +13,8 @@ function [fXi, xi] = LCDfdp(X, xpuntos)
   end
 
   % Se genera un histograma
-  [fXi, xi] = hist(X, Npuntos);
+  [fxi, ci] = hist(X, Npuntos);
 
   % Se calcula la función aproximada
-  fXi = fXi/Np/(xi(2) - xi(1));
+  fxi = fxi/Np/(ci(2) - ci(1));
 end

@@ -24,8 +24,11 @@ X = N + A;
 [fYi, yi] = LCDfdp(X);
 
 
-subplot(3,1,1); plot (yi1, fYi1, 'b'); axis([-2 2]);
-subplot(3,1,2); plot (yi2, fYi2, 'b'); axis([-2 2]);
-subplot(3,1,3); plot (yi, fYi, 'b'); axis([-2 2]);
+% subplot(3,1,1); plot (yi1, fYi1, 'b'); axis([-2 2]);
+% subplot(3,1,2); plot (yi2, fYi2, 'b'); axis([-2 2]);
+% subplot(3,1,3); plot (yi, fYi, 'b'); axis([-2 2]);
 
+% Forma teórica
 
+Xnt = LCDNormal(yi1,0,1);
+plot(yi1, Xnt);
