@@ -1,12 +1,6 @@
-# practicas-comdig
-Prácticas de la asignatura de Comunicaciones Digitales de GITT de la US
+[![Build Status](https://travis-ci.org/Bigomby/practicas-comdig.svg?branch=master)](https://travis-ci.org/Bigomby/practicas-comdig)
+[![Docs](https://img.shields.io/badge/Web-Cookbook-blue.svg)](http://bigomby.github.io/practicas-comdig/)
 
-| Prácticas    | Notas                               |
-|--------------|-------------------------------------|
-| Práctica 1   | No disponible
-| Práctica 2   | [Ver notas](https://goo.gl/Tg5wPm)
-| Práctica 3   | No disponible
-| Práctica 4   | No disponible
-| Práctica 5   | No disponible
-| Práctica 6   | No disponible
-| Práctica 7a   | No disponible
+# Prácticas de Comunicaciones Digitales
+
+Prácticas de la asignatura de Comunicaciones Digitales de GITT de la US.
