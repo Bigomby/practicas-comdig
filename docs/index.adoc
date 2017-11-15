@@ -262,8 +262,8 @@ Tenemos:
 
 Representar en una misma gráfica:
 
-* latexmath:[q \cdot f_{Y ∣ X = −1}(y \mid X = −1)]
-* latexmath:[p \cdot f_{Y ∣ X = 1}(y \mid X = 1)]
+* latexmath:[q \cdot f_{Y \mid X = -1}(y \mid X = -1)]
+* latexmath:[p \cdot f_{Y \mid X = 1}(y \mid X = 1)]
 
 Siendo latexmath:[p] y latexmath:[q] latexmath:[\{1/4, 3/4\}] respectivamente.
 
@@ -306,7 +306,7 @@ image::images/figure04.png[Figura 4]
 === Encontrar su frontera
 
 Para encontrar la frontera, es decir el punto en el que se cortan
-latexmath:[f_{Y ∣ X = −1}] y latexmath:[f_{Y ∣ X = 1}] podemos usar la función
+latexmath:[f_{Y \mid X=-1}] y latexmath:[f_{Y \mid X=1}] podemos usar la función
 `find()` de la siguiente forma:
 
 [source, octave]
