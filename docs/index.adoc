@@ -339,7 +339,7 @@ K = log_2 M
 
 | Régimen binario
 | latexmath:[R_b]
-| latexmath:[K \cdot N_s]
+| latexmath:[K \cdot R_s]
 
 | Tiempo de bit
 | latexmath:[T_b]
@@ -388,7 +388,7 @@ D = L * Tm * Ns;
   ** `L`: Número de muestras en la señal discreta.
 * Retorno
   ** `Xn`: Seañal transmitida.
-  ** `Bn`: Lo mismo que se introdujo.
+  ** `Bn`: Lo mismo que se introdujo, pero relleno con ceros si es necesario.
   ** `An`: Vector de símbolos a transmitir.
   ** `phi`: Pulso conformador: Depende de latexmath:[g(t)]:
     *** latexmath:[g(t)] es paso de baja: latexmath:[\phi(t) = \sqrt{\frac{1}{E_g}} g(t)]
@@ -407,7 +407,21 @@ Eb = Es/K; <1>
 <1> Recordemos que la energía de bit es la energía de símbolo entre el número
 de bits por cada símbolo (K).
 
-.Obtener la señal continua transmitida
+CAUTION: `p` debe ser una señal discreta, por lo que latexmath:[\omega_c t] pasa
+a ser `wc * n`, siendo `n = 1:1:L`.
+
+.Representar `n` símbolos de la señal transmitida
+****
+[source, octave]
+----
+t = Tm:Tm:L*Tm*N;
+plot(t, Xt(1:N*L));
+----
+
+Siendo `N` el número de símbolos a representar
+****
+
+.Obtener la señal continua transmitida (4 primeros símbolos)
 [source, octave]
 ----
 Xt = Xn / sqrt(Tm);
@@ -424,10 +438,53 @@ plot(An, 0,'o');
 hold off;
 ----
 
-.Representar `n` símbolos de la señal transmitida
+== Función transmisor PAM
+
 [source, octave]
 ----
-stem(Xn(1:N*L)); <1>
+function [Xn,Bn,An,phi,alfabetopam] = transmisorpam(Bn,Eb,M,p, L)
+  % ¿Cuántos bits hay en cada símbolo?
+  k = ceil(log2(M));
+
+  % Ajustemos M a una potencia de dos
+  M = 2^(k);
+
+  % El alfabeto [Ver la ecuación (4.10)]
+  alfabetopam=sqrt(3*Eb*log2(M)/(M^2-1))*(2*(1:1:M)-M-1);
+
+  % Si la secuencia Bn no tiene una longitud múltiplo de k, se completa con
+  % ceros
+  Nb = length(Bn); <1>
+  Bn = [Bn, zeros(1, k*ceil(Nb/k) - Nb)];
+  Nb = length(Bn); <2>
+  Ns = Nb/k; <3>
+
+  % La secuencia generada
+  if M > 2
+      An=alfabetopam(gray2de(reshape(Bn,k,Nb/k)')+1);
+  else
+      An=alfabetopam(Bn+1);
+  end
+
+  % Comprobación de las longitudes y otros datos del pulso básico para hacer
+  % que el número de muestras del mismo sea efectivamente L
+  Ls = length(p);
+  if Ls<L
+      p = [p,zeros(1,L-Ls)];
+  else
+      disp(['La duración del pulso se ha truncado a ',num2str(L), 'muestras'])
+      p = p(1:L);
+  end
+
+  % Normalicemos la energía del pulso suministrado para obtener la base del
+  % sistema
+  phi = (1/sqrt(p*p')) * p;
+
+  % Obtención del tren de pulsos
+  Xn = kron(An, phi);
+end
 ----
 
-<1> Siendo `N` el número de símbolos a representar
+<1> Número de bits que vamos a transmitir
+<2> Número de bits que vamos a transmitir tras la corrección
+<3> Número de símbolos que vamos a transmitir
