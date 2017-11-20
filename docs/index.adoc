@@ -317,3 +317,117 @@ g = r(idx); <2>
 
 <1> En `idx` tenemos el índice del punto donde se cortan las funciones
 <2> En `g` tendríamos el valor de las funciones en ese punto
+
+== Equivalencias
+
+****
+Siendo latexmath:[M] el número de símbolos, latexmath:[K] es el número de
+bits que corresponden a cada símbolo.
+
+[latexmath]
+++++
+K = log_2 M
+++++
+****
+
+.Equivalencia entre bits y símbolos
+[cols="3"]
+|===
+| Número de bits
+| latexmath:[N_b]
+| latexmath:[K \cdot N_s]
+
+| Régimen binario
+| latexmath:[R_b]
+| latexmath:[K \cdot N_s]
+
+| Tiempo de bit
+| latexmath:[T_b]
+| latexmath:[\frac{T_s}{K}]
+
+| Energía de bit
+| latexmath:[E_b]
+| latexmath:[\frac{E_s}{K}]
+|===
+
+NOTE: El tiempo de símbolo es la duración del pulso básico.
+
+El régimen binario es la inversa el tiempo de bit y los baudios la inversa del
+tiempo de símbolos:
+
+.Régimen binario y baudios
+[latexmath]
+++++
+T_s = \frac{1}{R_s} \quad T_b = \frac{1}{R_b}
+++++
+
+.Tiempo de muestreo
+[latexmath]
+++++
+T_m = \frac{Ts}{L}
+++++
+
+.Duración de una señal
+[source, octave]
+----
+Ns = Nb / K; <1>
+D = L * Tm * Ns;
+----
+
+<1> `Nb` es el número de bits de la señal
+
+== Transmitir una señal PAM
+
+* Parámetros
+  ** `Bn`: Vector de bits a transmitir.
+  ** `Eb`: Energía de bit.
+  ** `M`: Número de símbolos.
+  ** `p`: Depende de latexmath:[g(t)]:
+    *** latexmath:[g(t)] es paso de baja: latexmath:[p = g(t)]
+    *** latexmath:[g(t)] es paso de banda: latexmath:[p = g(t) \cdot cos(\omega_c t)]
+  ** `L`: Número de muestras en la señal discreta.
+* Retorno
+  ** `Xn`: Seañal transmitida.
+  ** `Bn`: Lo mismo que se introdujo.
+  ** `An`: Vector de símbolos a transmitir.
+  ** `phi`: Pulso conformador: Depende de latexmath:[g(t)]:
+    *** latexmath:[g(t)] es paso de baja: latexmath:[\phi(t) = \sqrt{\frac{1}{E_g}} g(t)]
+    *** latexmath:[g(t)] es paso de banda: latexmath:[\phi(t) = \sqrt{\frac{2}{E_g}} g(t) \cdot cos(\omega_c t)]
+  ** `alfabeto`: Vector con los posibles valores de los símbolos.
+
+.Transmitir la señal
+[source, octave]
+----
+K = log2(M);
+Es = 5;
+Eb = Es/K; <1>
+[Xn, Bn, An, phi, alfabeto] = transmisorpam(Bn, Eb, M, p, L);
+----
+
+<1> Recordemos que la energía de bit es la energía de símbolo entre el número
+de bits por cada símbolo (K).
+
+.Obtener la señal continua transmitida
+[source, octave]
+----
+Xt = Xn / sqrt(Tm);
+t = Tm:Tm:L*Tm*4;
+plot(t, Xt(1:4*L));
+----
+
+.Representar alfabeto
+[source, octave]
+----
+hold on;
+plot(alfabeto, 0,'r');
+plot(An, 0,'o');
+hold off;
+----
+
+.Representar `n` símbolos de la señal transmitida
+[source, octave]
+----
+stem(Xn(1:N*L)); <1>
+----
+
+<1> Siendo `N` el número de símbolos a representar
