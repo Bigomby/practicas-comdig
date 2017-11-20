@@ -20,7 +20,8 @@ g = sin(w0 * n);
 Bn = randi([0 1], 1, Nb);
 p = g .* cos(wc * n);
 [Xn, Bn, An, phi, alfabeto] = transmisorpam(Bn, Eb, M, p, L);
-Ephi = phi * phi'; % Debe ser 1
+Ephi = phi * phi'
+assert(Ephi, 1, 1e6)
 
 % 5) Tiempo de separación entre muestras
 Tb = 1 / Rb;
