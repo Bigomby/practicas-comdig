@@ -4,10 +4,8 @@ delta = 0.01;
 r = minv:delta:maxv;
 Np = 1e6;
 
-X = sign(randi([0 3], 1, Np) - 2.5);
-
-N1 = rand(1, Np);
-N2 = rand(1, Np);
+N1 = 2 * rand(1, Np) - 1;
+N2 = 2 * rand(1, Np) - 1;
 N = N1 + N2;
 
 Y1 = N - 1;

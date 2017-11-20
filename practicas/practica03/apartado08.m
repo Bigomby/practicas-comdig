@@ -28,3 +28,5 @@ Pe = Pe1 * 3/4 + Pe2 * 1/4
 Pe1d = length(find(Y1 >= g)) / length(Y1);
 Pe2d = length(find(Y2 <= g)) / length(Y2);
 Ped = Pe1d * 3/4 + Pe2d * 1/4
+
+assert(Pe, Ped, 1e-3);

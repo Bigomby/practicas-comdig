@@ -18,4 +18,4 @@ fY1 = 3/4 * fdpY1;
 fY2 = 1/4 * fdpY2;
 
 idx = find((fY1 <= fY2) & (fY1 > 0), 1);
-gamma = r(idx)
+g = r(idx)
