@@ -1,3 +1,8 @@
+addpath('../lib/');
+
+clear all;
+close all;
+
 L = 4;       % Número de muestras
 M = 4;       % Número de símbolos
 K = log2(M); % Número de bits por símbolo

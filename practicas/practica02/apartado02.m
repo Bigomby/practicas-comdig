@@ -1,3 +1,5 @@
+addpath('../lib/');
+
 % Definimos el número de muestras
 Np = 1e6;
 

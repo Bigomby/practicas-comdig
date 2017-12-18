@@ -1,3 +1,8 @@
+addpath('../lib/');
+
+clear all;
+close all;
+
 minv = -10;
 maxv = 10;
 delta = 0.01;
