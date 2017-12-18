@@ -9,7 +9,13 @@ apartado01;
 % Resolución %
 %%%%%%%%%%%%%%
 
+% Mediante correlación
 Ns = length(An);
-sn = phi * reshape(Xn, L, Ns);
+sn1 = phi * reshape(Xn, L, Ns);
 
-stem(unique(sn));
+% Mediante filtro adaptado
+hr = fliplr(phi);
+y = conv(Xn, hr);
+sn2 = y(L:L:L*Ns);
+
+stem(unique(sn2));

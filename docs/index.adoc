@@ -488,3 +488,20 @@ end
 <1> Número de bits que vamos a transmitir
 <2> Número de bits que vamos a transmitir tras la corrección
 <3> Número de símbolos que vamos a transmitir
+
+== Probabilidad de error teórica para una SNR
+
+.Tiempo de muestreo
+[latexmath]
+++++
+Q \left( \frac{\sqrt{6 k M E_{bav}}}{(M^2-1) N_{0}} \right)
+++++
+
+[source, octave]
+----
+SNRdb = 16;
+SNR = 10^(SNR/10);
+No = Eb / SNR;
+Pm = 2 * (M - 1) / M * Qfunct(sqrt((6 * k * M * Ebav) / ((M^2 - 1) * No)));
+Pb = Pm/k;
+----
